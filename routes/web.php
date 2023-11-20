@@ -1,31 +1,37 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserRouteController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\UserController;
+use App\Http\Middleware\User;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+// Admin Route
+Route::prefix('admin')->group(function () {
+    Route::get('/login', [AdminController::class, 'index'])->name('login.admin');
+    Route::post('/login/administrator', [AdminController::class, 'login'])->name('admin.login');
+    
+    Route::middleware('admin')->group(function () {
+        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+        Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
-Route::get('/', function () {
-    return view('welcome');
+    });
 });
 
-Route::get('/dashboard', [UserRouteController::class, 'dashboard'])
-    ->middleware(['auth', 'verified'])->name('dashboard');
+// Home Route
+Route::get('/', [Controller::class, 'index'])->name('home');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// Members Route
+Route::prefix('member')->group(function () {
+    Route::get('/login', [UserController::class, 'index'])->name('login.member');
+    Route::post('/login', [UserController::class, 'login'])->name('member.login');
+    
+    Route::middleware('user')->group(function () {
+        Route::get('/dashboard', [UserController::class, 'dashboard'])->name('member.dashboard');
+        Route::post('/logout', [UserController::class, 'logout'])->name('member.logout');
+    });
 });
+
+// Other routes and configurations...
 
 require __DIR__.'/auth.php';

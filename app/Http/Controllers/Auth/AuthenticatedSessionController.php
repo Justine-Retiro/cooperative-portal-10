@@ -8,6 +8,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -25,11 +26,24 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        $credentials = $request->only('account_number', 'password');
 
-        $request->session()->regenerate();
+        if (Auth::attempt($credentials)) {
+            // Check if the user has the required role (you can adjust this logic based on your roles structure)
+            if (auth()->user()->role == '0') {
+                Auth::logout();
+                throw ValidationException::withMessages([
+                    'account_number' => __('auth.role_not_allowed'),
+                ]);
+            }
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+            $request->session()->regenerate();
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }
+
+        throw ValidationException::withMessages([
+            'account_number' => __('auth.failed'),
+        ]);
     }
 
     /**

@@ -7,10 +7,11 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Admin>
  */
-class UserFactory extends Factory
+class AdminFactory extends Factory
 {
+
     protected static ?string $password;
 
     /**
@@ -21,19 +22,9 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'account_number' => $this->faker->unique()->numberBetween(10000, 99999),
+            'username' => $this->faker->unique()->userName,
             'password' => static::$password ??= Hash::make('123'),
             'remember_token' => Str::random(10),
         ];
     }
-
-    /**
-     * Indicate that the model's email address should be unverified.
-     */
-    // public function unverified(): static
-    // {
-    //     return $this->state(fn (array $attributes) => [
-    //         'email_verified_at' => null,
-    //     ]);
-    // }
 }

@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
     <!-- Style -->
-    <link rel="stylesheet" href="{{asset('css/globalCss/style.css')}}" />
+    <link rel="stylesheet" href="{{asset('css/dashboard/style.css')}}" />
 
     <link rel="stylesheet" href="{{asset('css/dashboard/dashboard.css')}}">
 </head>
@@ -59,7 +59,7 @@
           </div>
           <li>Menu</li>
           <li>
-            <a href="/coop/Admin/Dashboard/dashboard.php">
+            <a href="/member/dashboard">
               <span class="fa-stack fa-lg pull-left">
                 <i class="bi bi-border-all"></i>
               </span>
@@ -67,38 +67,29 @@
             </a>
           </li>
           <li>
-            <a href="/coop/Admin/Repositories/repositories.php">
-              <span class="fa-stack fa-lg pull-left">
-                <i class="bi bi-inbox"></i>
-              </span>
-              <span class="nav-text">Repositories</span>
-            </a>
-          </li>
-          <li>
-            <a href="/coop/Admin/MemberLoan/loan.php">
-              <span class="fa-stack fa-lg pull-left">
-                <i class="bi bi-archive"></i>
-              </span>
-              <span class="nav-text">Members Loan</span>
-            </a>
-          </li>
-          <li>
-            <a href="/coop/Admin/Payment/payment.php">
-              <span class="fa-stack fa-lg pull-left"
-                ><i class="bi bi-wallet2"></i></span>
-                <span class="nav-text">Payment</span> 
-              </a
-            >
-          </li>
-          <li>
-            <a href="/Account/account.html">
+            <a href="/coop/Member/Account/account.php">
               <span class="fa-stack fa-lg pull-left">
                 <i class="bi bi-person"></i>
               </span>
               <span class="nav-text">Profile</span>
             </a>
           </li>
-         
+          <li>
+            <a href="/member/account">
+              <span class="fa-stack fa-lg pull-left">
+                <i class="bi bi-inbox"></i>
+              </span>
+              <span class="nav-text">Account</span>
+            </a>
+          </li>
+          <li>
+            <a href="/coop/Member/Loan/loan.php">
+              <span class="fa-stack fa-lg pull-left"
+                ><i class="bi bi-wallet2"></i></span>
+                <span class="nav-text">Loan</span> 
+              </a
+            >
+          </li>
 
           <li>Settings</li>
           <li>
@@ -109,27 +100,32 @@
             >
           </li>
           <li>
-            <a href="/coop/globalApi/logout.php"
-              ><span class="fa-stack fa-lg pull-left">
-                <i class="bi bi-box-arrow-left"></i></span
-              ><span class="nav-text">Logout</span></a
-            >
+            <form method="POST" action="{{ route('member.logout') }}" >
+              @csrf
+              <a href="{{ route('member.logout') }} "
+                onclick="event.preventDefault();
+                this.closest('form').submit();">
+                
+                <span class="fa-stack fa-lg pull-left">
+                  <i class="bi bi-box-arrow-left"></i></span
+                ><span class="nav-text">Logout</span></a
+              >
+            </form>
           </li>
         </ul>
       </div>
       <!-- /#sidebar-wrapper -->
-      @yield('dashboard-panel')
+
       <!-- Page Content -->
         <div id="page-content-wrapper">
-          
+          @yield('member')
         </div>
         <!-- /#page-content-wrapper -->
               <!-- /#page-content-wrapper -->
     </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="https://cdn2.hubspot.net/hubfs/476360/Chart.js"></script>
-<script src="https://cdn2.hubspot.net/hubfs/476360/utils.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <!-- Sidebar -->
 <script src="{{asset('js/globalJs/script.js')}}"></script>
 

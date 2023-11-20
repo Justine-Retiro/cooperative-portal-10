@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
     <!-- Style -->
-    <link rel="stylesheet" href="{{asset('css/dashboard/style.css')}}" />
+    <link rel="stylesheet" href="{{asset('css/globalCss/style.css')}}" />
 
     <link rel="stylesheet" href="{{asset('css/dashboard/dashboard.css')}}">
 </head>
@@ -59,7 +59,7 @@
           </div>
           <li>Menu</li>
           <li>
-            <a href="/member/dashboard">
+            <a href="/coop/Admin/Dashboard/dashboard.php">
               <span class="fa-stack fa-lg pull-left">
                 <i class="bi bi-border-all"></i>
               </span>
@@ -67,29 +67,38 @@
             </a>
           </li>
           <li>
-            <a href="/coop/Member/Account/account.php">
+            <a href="/coop/Admin/Repositories/repositories.php">
+              <span class="fa-stack fa-lg pull-left">
+                <i class="bi bi-inbox"></i>
+              </span>
+              <span class="nav-text">Repositories</span>
+            </a>
+          </li>
+          <li>
+            <a href="/coop/Admin/MemberLoan/loan.php">
+              <span class="fa-stack fa-lg pull-left">
+                <i class="bi bi-archive"></i>
+              </span>
+              <span class="nav-text">Members Loan</span>
+            </a>
+          </li>
+          <li>
+            <a href="/coop/Admin/Payment/payment.php">
+              <span class="fa-stack fa-lg pull-left"
+                ><i class="bi bi-wallet2"></i></span>
+                <span class="nav-text">Payment</span> 
+              </a
+            >
+          </li>
+          <li>
+            <a href="/Account/account.html">
               <span class="fa-stack fa-lg pull-left">
                 <i class="bi bi-person"></i>
               </span>
               <span class="nav-text">Profile</span>
             </a>
           </li>
-          <li>
-            <a href="/member/account">
-              <span class="fa-stack fa-lg pull-left">
-                <i class="bi bi-inbox"></i>
-              </span>
-              <span class="nav-text">Account</span>
-            </a>
-          </li>
-          <li>
-            <a href="/coop/Member/Loan/loan.php">
-              <span class="fa-stack fa-lg pull-left"
-                ><i class="bi bi-wallet2"></i></span>
-                <span class="nav-text">Loan</span> 
-              </a
-            >
-          </li>
+         
 
           <li>Settings</li>
           <li>
@@ -100,9 +109,9 @@
             >
           </li>
           <li>
-            <form method="POST" action="{{ route('logout') }}" >
+            <form method="POST" action="{{ route('admin.logout') }}" >
               @csrf
-              <a href="{{ route('logout') }} "
+              <a href="{{ route('admin.logout') }} "
                 onclick="event.preventDefault();
                 this.closest('form').submit();">
                 
@@ -115,81 +124,18 @@
         </ul>
       </div>
       <!-- /#sidebar-wrapper -->
-
+      
       <!-- Page Content -->
         <div id="page-content-wrapper">
-          <div class="container-fluid xyz">
-            <div class="row"></div>
-              <div class="col-lg-12">
-                <h1 id="user-greet">
-                  Hi, John Doe
-                </h1>
-                <h1>
-                  Dashboard Overview
-                </h1>
-                <div class="row" style="margin-top: 2em;">
-                  <!-- Chart -->
-                  <div class="col-lg-2 w-auto">
-                    <div id="card-container">
-                      <div id="card-title">
-                          <table>
-                            <tr>
-                                <td>Account Balance</td>
-                            </tr>
-                            <tr>
-                              <th style="font-size: 25px;">₱99999.00</th>
-                            </tr>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <!-- Reports -->
-                  <div class="col-md-12 mt-md-5">
-                    <div class="card">
-                      <div class="card-header">
-                        <h3 class="pt-2">History</h3>
-                        <div class="dropdown">
-                          <button type="button" class="btn btn-link dropdown-toggle p-0" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-three-dots-vertical"></i>
-                          </button>
-                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><button class="dropdown-item" onclick="location.reload();">Refresh</button></li>
-                          </ul>
-                        </div>
-                      </div>
-                      <div class="table-responsive text-nowrap">
-                        <table class="table">
-                          <tr>
-                            <th>Transaction</th>
-                            <th>Type</th>
-                            <th>Date</th>
-                            <th>Status</th>
-                          </tr>
-                          <tr>
-                            <td>Transaction</td>
-                            <td>Type</td>
-                            <td>Date</td>
-                            <td>Status</td>
-                          </tr>
-
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  
-                  <!-- /Reports -->
-              </div>
-            </div>
-          </div>
+          @yield('admin')
         </div>
         <!-- /#page-content-wrapper -->
               <!-- /#page-content-wrapper -->
     </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdn2.hubspot.net/hubfs/476360/Chart.js"></script>
+<script src="https://cdn2.hubspot.net/hubfs/476360/utils.js"></script>
 <!-- Sidebar -->
 <script src="{{asset('js/globalJs/script.js')}}"></script>
 

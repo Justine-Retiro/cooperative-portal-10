@@ -9,4 +9,10 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
+
+    // Default Controller for home routes
+
+    public function index(){
+        return view('welcome');
+    }
 }
