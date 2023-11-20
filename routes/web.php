@@ -32,6 +32,5 @@ Route::prefix('member')->group(function () {
     });
 });
 
-// Other routes and configurations...
 
 require __DIR__.'/auth.php';
